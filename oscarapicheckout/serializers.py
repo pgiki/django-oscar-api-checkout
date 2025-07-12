@@ -407,9 +407,6 @@ class CheckoutSerializer(OscarCheckoutSerializer):
         request = self.context["request"]
         ownership_calc = self.get_ownership_calc()
         user, guest_email = ownership_calc(request, given_user, guest_email)
-        if not ((user and user.email) or guest_email):
-            # Translators: User facing error message in checkout
-            raise serializers.ValidationError(_("Email address is required."))
         data["user"] = user
         data["guest_email"] = guest_email
 
